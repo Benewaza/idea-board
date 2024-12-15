@@ -29,7 +29,8 @@ Generate a production build:
 ```
 npm run build
 
+```
+
 ## Known Limitations
 
 - This project does not include a test suite as suggested in the task description.
-```
