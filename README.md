@@ -28,7 +28,6 @@ Generate a production build:
 
 ```
 npm run build
-
 ```
 
 ## Known Limitations
