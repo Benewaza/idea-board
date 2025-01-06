@@ -13,10 +13,23 @@ const IdeaTile = ({ emitUpdateIdea, emitDeleteIdea, idea }) => {
     );
   }, [idea.dateSaved]);
 
+  const handleUpdateIdeaTitle = (event) => {
+    emitUpdateIdea(event, idea);
+  };
+
+  const handleUpdateIdeaDescription = (event) => {
+    emitUpdateIdea(event, idea);
+    setCharacterWarning(null);
+  };
+
+  const handleUpdateCharacterWarning = (event) => {
+    setCharacterWarning(event.target.value.length);
+  };
+
   return (
     <div className="border-[3px] border-black p-2 w-64 h-60 font-semibold bg-yellow-200 relative mx-auto sm:mx-0 flex flex-col">
       <TextareaAutosize
-        onBlur={(event) => emitUpdateIdea(event, idea)}
+        onBlur={handleUpdateIdeaTitle}
         className="resize-none bg-yellow-200 w-full"
         defaultValue={idea.title}
         name="title"
@@ -24,15 +37,12 @@ const IdeaTile = ({ emitUpdateIdea, emitDeleteIdea, idea }) => {
       />
 
       <TextareaAutosize
-        onBlur={(event) => {
-          emitUpdateIdea(event, idea);
-          setCharacterWarning(null);
-        }}
+        onBlur={handleUpdateIdeaDescription}
         className="resize-none bg-yellow-200 w-full text-sm overflow-scroll flex-grow"
         defaultValue={idea.description}
         name="description"
-        onChange={(e) => setCharacterWarning(e.target.value.length)}
-        onFocus={(e) => setCharacterWarning(e.target.value.length)}
+        onChange={handleUpdateCharacterWarning}
+        onFocus={handleUpdateCharacterWarning}
         maxLength={140}
       />
 
@@ -47,6 +57,7 @@ const IdeaTile = ({ emitUpdateIdea, emitDeleteIdea, idea }) => {
           </div>
         )}
         <button
+          type="button"
           onClick={() => emitDeleteIdea(idea.id)}
           className="text-red-600 hover:text-red-700 text-xs ml-auto"
         >
