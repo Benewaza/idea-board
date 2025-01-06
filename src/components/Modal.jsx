@@ -21,7 +21,7 @@ const Modal = ({ addIdeaSubmit, closeModal }) => {
       <div className="border-4 p-6 bg-gray-200 border-black font-bold text-sm w-[600px] -mt-40">
         <form onSubmit={submitForm}>
           <div className="mb-4">
-            <label className="block text-lg font-bold mb-2" forhtml="title">
+            <label className="block text-lg font-bold mb-2" htmlFor="title">
               Idea Title
             </label>
             <input
@@ -37,7 +37,7 @@ const Modal = ({ addIdeaSubmit, closeModal }) => {
           <div className="mb-4">
             <label
               className="block text-lg font-bold mb-2"
-              forhtml="description"
+              htmlFor="description"
             >
               Description
             </label>
