@@ -1,10 +1,10 @@
 import TextareaAutosize from "react-textarea-autosize";
 import { useEffect, useState } from "react";
+import DeleteTile from "./DeleteTile";
 
 const IdeaTile = ({ emitUpdateIdea, emitDeleteIdea, idea }) => {
   const [characterWarning, setCharacterWarning] = useState();
   const [formattedDate, setFormattedDate] = useState();
-  const [deleteConfirmation, setDeleteConfirmation] = useState(false);
 
   // format date  for last saved / created, re-run everytime an idea is updated
   useEffect(() => {
@@ -14,56 +14,18 @@ const IdeaTile = ({ emitUpdateIdea, emitDeleteIdea, idea }) => {
     );
   }, [idea.dateSaved]);
 
-  const handleUpdateIdeaTitle = (event) => {
-    emitUpdateIdea(event, idea);
-  };
+  const handleUpdateIdeaTitle = (event) => emitUpdateIdea(event, idea);
 
   const handleUpdateIdeaDescription = (event) => {
     emitUpdateIdea(event, idea);
     setCharacterWarning(null);
   };
 
-  const handleUpdateCharacterWarning = (event) => {
+  const handleUpdateCharacterWarning = (event) =>
     setCharacterWarning(event.target.value.length);
-  };
 
-  const handleDeleteIdea = () => {
-    emitDeleteIdea(idea.id);
-  };
+  const handleDeleteIdea = () => emitDeleteIdea(idea.id);
 
-  const renderDeleteButton = () => {
-    if (deleteConfirmation) {
-      return (
-        <div className="ml-auto text-[8px] text-gray-800">
-          Are you sure?&nbsp;
-          <button
-            type="button"
-            onClick={handleDeleteIdea}
-            className="text-red-600 hover:text-red-700 text-xs"
-          >
-            Yes
-          </button>
-          <span className="text-xs">&nbsp;/&nbsp;</span>
-          <button
-            type="button"
-            className="text-red-600 hover:text-red-700 text-xs"
-            onClick={() => setDeleteConfirmation(false)}
-          >
-            No
-          </button>
-        </div>
-      );
-    }
-    return (
-      <button
-        type="button"
-        onClick={() => setDeleteConfirmation(true)}
-        className="text-red-600 hover:text-red-700 text-xs ml-auto"
-      >
-        Delete
-      </button>
-    );
-  };
   return (
     <div className="border-[3px] border-black p-2 w-64 h-60 font-semibold bg-yellow-200 relative mx-auto sm:mx-0 flex flex-col">
       <TextareaAutosize
@@ -94,7 +56,7 @@ const IdeaTile = ({ emitUpdateIdea, emitDeleteIdea, idea }) => {
             {characterWarning} / 140
           </div>
         )}
-        {renderDeleteButton()}
+        <DeleteTile emitDeleteIdea={handleDeleteIdea} />
       </div>
     </div>
   );
