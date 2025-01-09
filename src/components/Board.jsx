@@ -57,15 +57,16 @@ const Board = () => {
     updateIdeasStateStorage(updatedIdeas);
   };
 
-  const sortItems = (e) => {
-    const sortValue = e.target.value;
-    const sortedItems = [...ideas].sort(
-      (a, b) =>
-        sortValue === "creation"
-          ? new Date(a.dateCreated) - new Date(b.dateCreated) // sort ideas based on created date iso string
-          : a.title.localeCompare(b.title) // sort alphabetically using title
-    );
-    setIdeas(sortedItems);
+  const sortItems = (sortValue) => {
+    setIdeas((prevState) => {
+      // ...spread array so that it creates new array which react recognises then return sorted array
+      return [...prevState].sort(
+        (a, b) =>
+          sortValue === "creation"
+            ? new Date(a.dateCreated) - new Date(b.dateCreated) // sort ideas based on created date iso string
+            : a.title.localeCompare(b.title) // sort alphabetically using title
+      );
+    });
   };
 
   const updateIdeasStateStorage = (ideas) => {

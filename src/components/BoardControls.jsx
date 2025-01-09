@@ -14,7 +14,7 @@ const BoardControls = ({ emitModalVisibility, emitSortItems }) => (
       <select
         name="filter"
         id="filter"
-        onChange={(e) => emitSortItems(e)}
+        onChange={(e) => emitSortItems(e.target.value)}
         className="w-36 px-2 py-2 border-2 border-black rounded-none outline-0 font-bold text-sm text-black bg-gray-200"
       >
         <option value="creation">Creation date</option>
