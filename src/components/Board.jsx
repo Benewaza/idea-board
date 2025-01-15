@@ -4,16 +4,13 @@ import IdeaTile from "./IdeaTile";
 import BoardControls from "./BoardControls";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { getFromLocalStorage, saveToLocalStorage } from "../localStorageUtils";
 
 const Board = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
   // get ideas from local storage else set ideas to empty array
-  const [ideas, setIdeas] = useState(() => {
-    const data = localStorage.getItem("ideas");
-    const ideasFromStorage = JSON.parse(data);
-    return ideasFromStorage || [];
-  });
+  const [ideas, setIdeas] = useState(() => getFromLocalStorage("ideas", []));
 
   // create new idea object
   function Idea(title, description) {
@@ -71,7 +68,7 @@ const Board = () => {
 
   const updateIdeasStateStorage = (ideas) => {
     setIdeas(ideas);
-    localStorage.setItem("ideas", JSON.stringify(ideas));
+    saveToLocalStorage("ideas", ideas);
   };
 
   return (
